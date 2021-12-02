@@ -1,0 +1,65 @@
+:root {
+  --square-size: 7;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* body {
+    background-color: red;
+} */
+
+header {
+    display: flex;
+    height: 100px;
+    align-items: center;
+}
+
+.game-name,
+.level {
+    width: 50%;
+    display: flex;
+    padding: 0 2em;
+}
+
+.level {
+    justify-content: flex-end;
+}
+
+.level select {
+    width: 150px;
+    margin-left: 0.6em;
+    margin-right: 1em;
+}
+
+main {
+    height: calc(100vh - 100px);
+    background-color: #7FFFD4;
+}
+
+.container {
+    width: 600px;
+    height: 600px;
+    margin: 0 auto;
+    padding-top: 6em;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.square {
+    /* width: calc(100% / var(--square-size)); 
+    height: calc(100% / var(--square-size)); */
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.square.clicked {
+    background-color: #6495ED;
+    color: white;
+}
