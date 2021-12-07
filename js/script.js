@@ -28,6 +28,9 @@ playButton.addEventListener('click', function () {
     // generiamo griglia
     let row = 0;
     let column = 0;
+    let bombList = [];
+    let randNumb = 0;
+
 
     // SE difficile
     if (difficulty == 'hard') {
@@ -45,6 +48,26 @@ playButton.addEventListener('click', function () {
         column = 10;
     }
 
+    i = 0;
+
+    // genero 16 bombe random
+
+    while (i < 16) {
+        randNumb = parseInt(Math.floor(Math.random() * (row * column)) + 1);
+        if (bombList.includes(randNumb)) {
+         randNumb = parseInt(Math.floor(Math.random() * (row * column)) + 1);
+         bombList.push(randNumb);
+        } else {
+            bombList.push(randNumb);
+        }
+        i++;
+    }
+
+    console.log(bombList);
+
+
+    // genero griglia
+
     let sqrNumb = row * column;
     for (let index = 0; index < sqrNumb; index++) {
         const square = document.createElement('div');
@@ -56,10 +79,40 @@ playButton.addEventListener('click', function () {
         // inseriamo i numeri progressivi all'interno dei quadrati creati
         square.append(index+1);
 
+        let counterVal = 0;
+        let result = document.getElementById('result');
+
+        // conto i click
+        incrementClick = function () {
+            updateCount(++counterVal)
+        };
+
+        function updateCount(val) {
+            result.innerHTML = `Hai cliccato ${val - 1} volte`;
+        }
+
 
         // cambio colore al click di un quadrato
         square.addEventListener('click', function () {
-            this.classList.add('clicked');
+            
+            let totalBomb = document.querySelectorAll('.clicked-red');
+            square.onclick = incrementClick();
+
+            let number = parseInt(square.innerText);
+
+            if (bombList.includes(number)){
+                result.classList.add('block');
+                this.classList.add('clicked-red');
+                containerGrid.replaceWith(containerGrid.cloneNode(true));
+            
+            } else if (counterVal == sqrNumb - 16) {
+                containerGrid.replaceWith(containerGrid.cloneNode(true));
+                result.innerHTML += ` Hai vinto`;
+                result.classList.add('block');
+            } else {
+                this.classList.add('clicked');
+                counterVal = counterVal + 1;
+            }
         })
     }
 })

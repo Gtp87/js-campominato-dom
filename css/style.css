@@ -49,6 +49,16 @@ main {
     flex-wrap: wrap;
 }
 
+.result {
+     display: none;
+    padding: 0.5em 0;
+    font-size: 2em;
+}
+
+.result.block  {
+    display: block;
+}
+
 .square {
     /* width: calc(100% / var(--square-size)); 
     height: calc(100% / var(--square-size)); */
@@ -62,4 +72,16 @@ main {
 .square.clicked {
     background-color: #6495ED;
     color: white;
+}
+
+.clicked-red {
+    background-color: red;
+}
+
+footer {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    margin: 0 auto;
+    align-items: center;
 }
